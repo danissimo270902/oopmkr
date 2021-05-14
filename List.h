@@ -2,9 +2,11 @@
 // Created by danis on 14.05.2021.
 //
 
+
 #ifndef OOPMKR_LIST_H
 #define OOPMKR_LIST_H
 
+#include <iostream>
 
 class List {
 private:
@@ -76,6 +78,38 @@ public:
             return;
         }
     }
+    void erase(int index){
+        if(index >= length){
+            return;
+        }
+        if(length == 1){
+            head = nullptr;
+            tail = nullptr;
+            length--;
+            return;
+        }
+        if(index == 0){
+            head = head->next;
+            head->prev = nullptr;
+            length--;
+            return;
+        }
+        if(index == length - 1){
+            tail = tail->prev;
+            tail->next = nullptr;
+            length--;
+            return;
+        }
+        ListNode* count;
+        count = head;
+        for (int i = 0; i < index; i++) {
+            count = count->next;
+        }
+        count->prev->next = count->next;
+        count->next->prev = count->prev;
+        length--;
+    }
+
 
 };
 

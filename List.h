@@ -46,31 +46,31 @@ public:
         if(index > length){
             return;
         }
-        length++;
+
         auto *node = new ListNode(value) ;
         if(length == 0){
             head = node;
             tail = node;
+            length++;
             return;
         }
+        length++;
         ListNode* count = head;
         for(int i = 0; i < index; i++){
             count = count->next;
         }
-        node->next = count;
-        if(count == tail){
-            count->next = node;
-            node->prev = count;
-            tail = node;
-            return;
-        }
-        count = count->next;
+
         if(count == head){
             count->prev = node;
             node->next = count;
             head = node;
             return;
-        } else{
+        } else if(count == tail){
+            count->next = node;
+            node->prev = count;
+            tail = node;
+            return;
+        }else{
             node->prev = count->prev;
             node->next = count;
             node->prev->next = node;

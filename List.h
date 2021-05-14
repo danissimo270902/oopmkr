@@ -28,17 +28,54 @@ private:
 
     ListNode*  head;
     ListNode*  tail;
+    int length;
 
 public:
 
     List(){
         head = nullptr;
         tail = nullptr;
+        length = 0;
 
     }
 
     ~List() = default;
-
+    void insert(int index, double value){
+        if(index > length){
+            return;
+        }
+        length++;
+        auto *node = new ListNode(value) ;
+        if(length == 0){
+            head = node;
+            tail = node;
+            return;
+        }
+        ListNode* count = head;
+        for(int i = 0; i < index; i++){
+            count = count->next;
+        }
+        node->next = count;
+        if(count == tail){
+            count->next = node;
+            node->prev = count;
+            tail = node;
+            return;
+        }
+        count = count->next;
+        if(count == head){
+            count->prev = node;
+            node->next = count;
+            head = node;
+            return;
+        } else{
+            node->prev = count->prev;
+            node->next = count;
+            node->prev->next = node;
+            count->prev = node;
+            return;
+        }
+    }
 
 };
 

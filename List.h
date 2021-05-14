@@ -109,6 +109,17 @@ public:
         count->next->prev = count->prev;
         length--;
     }
+    void output(){
+        if(length == 0){
+            std::cout<<"List is empty - nothing to output\n";
+        }
+        ListNode* count = head;
+        for(int i = 0; i < length; i++){
+            std::cout<<i<<":\t"<<count->value<<"\n";
+            count = count->next;
+        }
+    }
+
 
 
 };
